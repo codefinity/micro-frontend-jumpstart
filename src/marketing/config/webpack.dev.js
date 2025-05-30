@@ -8,6 +8,13 @@ const devConfig = {
   mode: 'development',
   devServer: {
     port: 8081,
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+        runtimeErrors: true,
+      }
+    },
     historyApiFallback: {
       index: 'index.html',
     },
@@ -19,7 +26,12 @@ const devConfig = {
       exposes: {
         './MarketingApp': './src/bootstrap',
       },
-      shared: packageJson.dependencies,
+      shared: {
+        '@mui/material': {
+          singleton: true,
+          requiredVersion: '^7.1.0', // replace with actual version
+        },
+      },
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
